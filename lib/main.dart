@@ -5,5 +5,7 @@ import 'fadeAppTest.dart';
 import 'navigatorTest.dart';
 import 'platformChannel.dart';
 import 'listRequest.dart';
+import 'showLoading.dart';
+import 'isolateApp.dart';
 
 void main() => runApp(new ListRequestApp());
