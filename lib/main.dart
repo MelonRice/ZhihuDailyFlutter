@@ -4,9 +4,9 @@ import 'sampleApp1.dart';
 import 'fadeAppTest.dart';
 import 'navigatorTest.dart';
 import 'platformChannel.dart';
-import 'listRequest.dart';
+import 'package:starter/zhihu/zhihudaily.dart';
 import 'showLoading.dart';
 import 'isolateApp.dart';
 import 'listItem.dart';
 
-void main() => runApp(new ListRequestApp());
+void main() => runApp(new ZhihuDailyApp());
