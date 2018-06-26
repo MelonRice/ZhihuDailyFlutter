@@ -5,6 +5,10 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:starter/zhihu/storyItem.dart';
 
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+
+String selectedUrl = "https://www.baidu.com";
+
 class ZhihuDailyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -78,14 +82,28 @@ class _SampleAppPageState extends State<SampleAppPage> {
   Widget getItem(BuildContext context, int i) {
     return new Container(
         margin: const EdgeInsets.only(bottom: 8.0),
-        child: new StoryItem(detail: widgets[i]));
+        child: new StoryItem(
+          detail: widgets[i],
+          onTap: () {
+            Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+              return new WebviewScaffold(
+                url: selectedUrl,
+                appBar: new AppBar(
+                  title: new Text("Widget webview"),
+                ),
+                withZoom: true,
+                withLocalStorage: true,
+              );
+            }));
+          },
+        ));
   }
 
   loadData() async {
     String dataURL = "https://news-at.zhihu.com/api/4/news/latest";
     http.Response response = await http.get(dataURL);
     setState(() {
-      widgets = JSON.decode(response.body)["stories"];
+      widgets = json.decode(response.body)["stories"];
     });
   }
 }

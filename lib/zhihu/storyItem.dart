@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
 class StoryItem extends StatelessWidget {
-  StoryItem({Key key, @required this.detail}) : super(key: key);
+  StoryItem({Key key, this.onTap, @required this.detail}) : super(key: key);
 
   static const double height = 120.0;
   final dynamic detail;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,8 @@ class StoryItem extends StatelessWidget {
         padding: const EdgeInsets.all(0.0),
         height: height,
         child: new Card(
+            child: new InkWell(
+          onTap: onTap,
           child: new Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -68,7 +71,7 @@ class StoryItem extends StatelessWidget {
               ),
             ],
           ),
-        ),
+        )),
       ),
     );
   }
