@@ -1,11 +1,12 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
-import 'package:starter/zhihu/storyItem.dart';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:http/http.dart' as http;
+import 'package:starter/model/homePageModel.dart';
+import 'package:starter/widget/homeBanner.dart';
+import 'package:starter/zhihu/storyItem.dart';
 
 String selectedUrl = "https://www.baidu.com";
 
@@ -31,12 +32,30 @@ class SampleAppPage extends StatefulWidget {
 }
 
 class _SampleAppPageState extends State<SampleAppPage> {
-  List widgets = [];
+  List<HomePageModel> homePageDataList = new List<HomePageModel>();
+  List<TopStoriesModel> topBannerModel;
 
   @override
   void initState() {
     super.initState();
     loadData();
+  }
+
+  Widget buildItem(BuildContext context, int position) {
+    Widget widget;
+
+    HomePageModel item = homePageDataList[position];
+
+    switch (item.itemType) {
+      case HomePageModel.itemTypeBanner:
+        widget = new HomeBanner(topBannerModel);
+        break;
+      case HomePageModel.itemTypeNormal:
+        widget = getItem(context, position);
+        break;
+    }
+
+    return widget;
   }
 
   @override
@@ -46,10 +65,10 @@ class _SampleAppPageState extends State<SampleAppPage> {
         title: new Text("知乎日报"),
       ),
       body: new ListView.builder(
-          itemCount: widgets.length,
+          itemCount: homePageDataList.length,
           padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
           itemBuilder: (BuildContext context, int position) {
-            return getItem(context, position);
+            return buildItem(context, position);
           }),
       drawer: new Drawer(
         child: new ListView(
@@ -83,9 +102,11 @@ class _SampleAppPageState extends State<SampleAppPage> {
     return new Container(
         margin: const EdgeInsets.only(bottom: 8.0),
         child: new StoryItem(
-          detail: widgets[i],
+          detail: homePageDataList[i],
           onTap: () {
-            Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+            Navigator
+                .of(context)
+                .push(new MaterialPageRoute(builder: (context) {
               return new WebviewScaffold(
                 url: selectedUrl,
                 appBar: new AppBar(
@@ -102,8 +123,26 @@ class _SampleAppPageState extends State<SampleAppPage> {
   loadData() async {
     String dataURL = "https://news-at.zhihu.com/api/4/news/latest";
     http.Response response = await http.get(dataURL);
-    setState(() {
-      widgets = json.decode(response.body)["stories"];
-    });
+
+    List banner = json.decode(response.body)["top_stories"];
+    List storise = json.decode(response.body)["stories"];
+
+    if (storise.isNotEmpty) {
+      homePageDataList = storise.map((model) {
+        return new HomePageModel.fromJson(model);
+      }).toList();
+    }
+
+    if (banner.isNotEmpty) {
+      topBannerModel = banner.map((model) {
+        return new TopStoriesModel.fromJson(model);
+      }).toList();
+
+      HomePageModel top = new HomePageModel();
+      top.setItemType(HomePageModel.itemTypeBanner);
+      homePageDataList.insert(0, top);
+    }
+
+    setState(() {});
   }
 }
