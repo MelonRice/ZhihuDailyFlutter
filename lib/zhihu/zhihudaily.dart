@@ -8,8 +8,6 @@ import 'package:starter/model/homePageModel.dart';
 import 'package:starter/widget/homeBanner.dart';
 import 'package:starter/zhihu/storyItem.dart';
 
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
-
 String selectedUrl = "http://daily.zhihu.com/story/9688113";
 
 class ZhihuDailyApp extends StatelessWidget {
@@ -104,9 +102,9 @@ class _SampleAppPageState extends State<SampleAppPage> {
     return new Container(
         margin: const EdgeInsets.only(bottom: 8.0),
         child: new StoryItem(
-          detail: stories[i],
+          detail: homePageDataList[i],
           onTap: () {
-            loadItem(stories[i]["id"]);
+            loadItem(homePageDataList[i].id);
           },
         ));
   }
