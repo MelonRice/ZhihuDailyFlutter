@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:starter/model/homePageModel.dart';
+import 'package:zhihudaily/model/homePageModel.dart';
 
 class StoryItem extends StatelessWidget {
   StoryItem({Key key, this.onTap, @required this.detail}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:starter/model/homePageModel.dart';
+import 'package:zhihudaily/model/homePageModel.dart';
 
 class HomeBanner extends StatefulWidget {
   final List<TopStoriesModel> bannerList;
