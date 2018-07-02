@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:starter/zhihu/storyItem.dart';
+import 'package:zhihudaily/zhihu/storyItem.dart';
 
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
@@ -93,7 +93,7 @@ class _SampleAppPageState extends State<SampleAppPage> {
   loadItem(int id) async {
     String dataURL = "https://news-at.zhihu.com/api/4/news/$id";
     http.Response response = await http.get(dataURL);
-    
+
     Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
       return new WebviewScaffold(
         url: json.decode(response.body)["share_url"],
