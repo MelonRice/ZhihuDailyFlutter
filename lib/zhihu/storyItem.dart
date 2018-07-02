@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:starter/model/homePageModel.dart';
 
 class StoryItem extends StatelessWidget {
   StoryItem({Key key, this.onTap, @required this.detail}) : super(key: key);
 
   static const double height = 120.0;
-  final dynamic detail;
+  final HomePageModel detail;
   final VoidCallback onTap;
 
   @override
@@ -40,7 +41,7 @@ class StoryItem extends StatelessWidget {
                         new Padding(
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: new Text(
-                            detail["title"],
+                            detail.title,
                             maxLines: 3,
                             style: descriptionStyle.copyWith(
                                 fontSize: 16.0, color: Colors.black87),
@@ -61,7 +62,7 @@ class StoryItem extends StatelessWidget {
                           child: new Container(
                         foregroundDecoration: new BoxDecoration(
                           image: new DecorationImage(
-                              image: new NetworkImage(detail["images"][0]),
+                              image: new NetworkImage(detail.images[0]),
                               fit: BoxFit.cover),
                         ),
                       )),
