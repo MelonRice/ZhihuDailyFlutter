@@ -8,7 +8,9 @@ import 'package:starter/model/homePageModel.dart';
 import 'package:starter/widget/homeBanner.dart';
 import 'package:starter/zhihu/storyItem.dart';
 
-String selectedUrl = "https://www.baidu.com";
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+
+String selectedUrl = "http://daily.zhihu.com/story/9688113";
 
 class ZhihuDailyApp extends StatelessWidget {
   @override
@@ -102,22 +104,27 @@ class _SampleAppPageState extends State<SampleAppPage> {
     return new Container(
         margin: const EdgeInsets.only(bottom: 8.0),
         child: new StoryItem(
-          detail: homePageDataList[i],
+          detail: stories[i],
           onTap: () {
-            Navigator
-                .of(context)
-                .push(new MaterialPageRoute(builder: (context) {
-              return new WebviewScaffold(
-                url: selectedUrl,
-                appBar: new AppBar(
-                  title: new Text("Widget webview"),
-                ),
-                withZoom: true,
-                withLocalStorage: true,
-              );
-            }));
+            loadItem(stories[i]["id"]);
           },
         ));
+  }
+
+  loadItem(int id) async {
+    String dataURL = "https://news-at.zhihu.com/api/4/news/$id";
+    http.Response response = await http.get(dataURL);
+
+    Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+      return new WebviewScaffold(
+        url: json.decode(response.body)["share_url"],
+        appBar: new AppBar(
+          title: new Text(json.decode(response.body)["title"]),
+        ),
+        withZoom: true,
+        withLocalStorage: true,
+      );
+    }));
   }
 
   loadData() async {
