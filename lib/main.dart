@@ -8,5 +8,6 @@ import 'package:zhihudaily/zhihu/zhihudaily.dart';
 import 'package:zhihudaily/exampleDemo/showLoading.dart';
 import 'package:zhihudaily/exampleDemo/isolateApp.dart';
 import 'package:zhihudaily/exampleDemo/listItem.dart';
+import 'package:zhihudaily/exampleDemo/layoutApp.dart';
 
-void main() => runApp(new ZhihuDailyApp());
+void main() => runApp(new LayoutApp());
