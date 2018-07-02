@@ -22,16 +22,14 @@ class HomeBannerState extends State<HomeBanner> {
 
   Widget buildBanner() {
     return new Container(
-        height: 200.0,
-        child: new Padding(
-          padding: const EdgeInsets.fromLTRB(8.0, 4.0, 4.0, 8.0),
-          child: new Stack(
-            children: <Widget>[
-              buildPagerView(),
-              buildIndicators(),
-            ],
-          ),
-        ));
+      height: 200.0,
+      child: new Stack(
+        children: <Widget>[
+          buildPagerView(),
+          buildIndicators(),
+        ],
+      ),
+    );
   }
 
   Widget buildPagerView() {
@@ -64,21 +62,21 @@ class HomeBannerState extends State<HomeBanner> {
     return new Align(
       alignment: Alignment.bottomCenter,
       child: new Container(
-        color: Colors.black45,
-        height: 40.0,
+        color: Colors.black38,
+        height: 60.0,
         width: double.infinity,
         child: new Column(
           children: <Widget>[
             new Padding(
-              padding: const EdgeInsets.fromLTRB(0.0, 4.0, 0.0, 0.0),
+              padding: const EdgeInsets.fromLTRB(0.0, 8.0, 0.0, 0.0),
               child: new Text(widget.bannerList[_curIndicatorsIndex].title,
-                  maxLines: 1, style: new TextStyle(color: Colors.white)),
+                  maxLines: 1, style: new TextStyle(color: Colors.white, fontSize: 16.0)),
             ),
             new Padding(
-              padding: const EdgeInsets.fromLTRB(0.0, 6.0, 0.0, 0.0),
+              padding: const EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 0.0),
               child: new SizedBox(
-                width: widget.bannerList.length * 16.0,
-                height: 5.0,
+                width: widget.bannerList.length * 12.0,
+                height: 6.0,
                 child: new Row(
                   children: _indicators,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -94,12 +92,9 @@ class HomeBannerState extends State<HomeBanner> {
   _initIndicators() {
     _indicators.clear();
     for (int i = 0; i < widget.bannerList.length; i++) {
-      _indicators.add(new SizedBox(
-        width: 5.0,
-        height: 5.0,
-        child: new Container(
-          color: i == _curIndicatorsIndex ? Colors.white : Colors.grey,
-        ),
+      _indicators.add(new CircleAvatar(
+        radius: 6.0,
+        backgroundColor: i == _curIndicatorsIndex ? Colors.white : Colors.grey,
       ));
     }
   }

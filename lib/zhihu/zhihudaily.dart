@@ -66,7 +66,6 @@ class _SampleAppPageState extends State<SampleAppPage> {
       ),
       body: new ListView.builder(
           itemCount: homePageDataList.length,
-          padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
           itemBuilder: (BuildContext context, int position) {
             return buildItem(context, position);
           }),
@@ -100,7 +99,7 @@ class _SampleAppPageState extends State<SampleAppPage> {
 
   Widget getItem(BuildContext context, int i) {
     return new Container(
-        margin: const EdgeInsets.only(bottom: 8.0),
+        margin: const EdgeInsets.only(left: 4.0, right: 4.0),
         child: new StoryItem(
           detail: homePageDataList[i],
           onTap: () {
