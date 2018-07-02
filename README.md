@@ -1,6 +1,6 @@
-# starter
+# zhihudaily_flutter
 
-A new Flutter project.
+A new Flutter zhihudaily project.
 
 ## Getting Started
 

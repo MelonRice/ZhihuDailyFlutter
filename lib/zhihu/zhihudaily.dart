@@ -4,9 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:http/http.dart' as http;
-import 'package:starter/model/homePageModel.dart';
-import 'package:starter/widget/homeBanner.dart';
-import 'package:starter/zhihu/storyItem.dart';
+import 'package:zhihudaily/model/homePageModel.dart';
+import 'package:zhihudaily/widget/homeBanner.dart';
+import 'package:zhihudaily/zhihu/storyItem.dart';
 
 String selectedUrl = "http://daily.zhihu.com/story/9688113";
 
