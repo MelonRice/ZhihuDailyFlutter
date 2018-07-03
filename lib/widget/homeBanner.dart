@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:zhihudaily/model/homePageModel.dart';
 
@@ -15,6 +17,25 @@ class HomeBannerState extends State<HomeBanner> {
 
   int _curIndicatorsIndex = 0;
 
+  Timer timer;
+
+  PageController pageController = new PageController(initialPage: 0);
+
+  @override
+  void initState() {
+    super.initState();
+    timer = new Timer.periodic(new Duration(seconds: 3), (timer) {
+      pageController.animateToPage(_curIndicatorsIndex == _indicators.length - 1 ? 0 : _curIndicatorsIndex + 1,
+          duration: new Duration(milliseconds: 500), curve: Curves.linear);
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timer.cancel();
+  }
+
   @override
   Widget build(BuildContext context) {
     return buildBanner();
@@ -22,7 +43,7 @@ class HomeBannerState extends State<HomeBanner> {
 
   Widget buildBanner() {
     return new Container(
-      height: 200.0,
+      height: 220.0,
       child: new Stack(
         children: <Widget>[
           buildPagerView(),
@@ -34,6 +55,7 @@ class HomeBannerState extends State<HomeBanner> {
 
   Widget buildPagerView() {
     return new PageView.builder(
+      controller: pageController,
       itemBuilder: (BuildContext context, int index) {
         return buildItem(context, index);
       },
@@ -70,7 +92,8 @@ class HomeBannerState extends State<HomeBanner> {
             new Padding(
               padding: const EdgeInsets.fromLTRB(0.0, 8.0, 0.0, 0.0),
               child: new Text(widget.bannerList[_curIndicatorsIndex].title,
-                  maxLines: 1, style: new TextStyle(color: Colors.white, fontSize: 16.0)),
+                  maxLines: 1,
+                  style: new TextStyle(color: Colors.white, fontSize: 16.0)),
             ),
             new Padding(
               padding: const EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 0.0),
@@ -100,7 +123,7 @@ class HomeBannerState extends State<HomeBanner> {
   }
 
   _changePage(int index) {
-    _curIndicatorsIndex = index % widget.bannerList.length;
+    _curIndicatorsIndex = index;
     setState(() {});
   }
 }
