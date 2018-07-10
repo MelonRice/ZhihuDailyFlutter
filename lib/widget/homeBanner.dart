@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:zhihudaily/model/homePageModel.dart';
-import 'package:zhihudaily/utils/WebUtils.dart';
+import 'package:zhihudaily/utils/RouterUtils.dart';
 
 class HomeBanner extends StatefulWidget {
   final List<TopStoriesModel> bannerList;
@@ -72,7 +72,7 @@ class HomeBannerState extends State<HomeBanner> {
 
     return new GestureDetector(
       onTap: () {
-        WebUtils.startWebView(context, banner.id);
+        RouterUtils.startWebView(context, banner.id);
       },
       child: new Image.network(
         banner.image,

@@ -2,14 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:http/http.dart' as http;
 import 'package:zhihudaily/model/homePageModel.dart';
-import 'package:zhihudaily/utils/WebUtils.dart';
+import 'package:zhihudaily/utils/RouterUtils.dart';
+import 'package:zhihudaily/widget/drawerContent.dart';
 import 'package:zhihudaily/widget/homeBanner.dart';
 import 'package:zhihudaily/zhihu/storyItem.dart';
-
-String selectedUrl = "http://daily.zhihu.com/story/9688113";
 
 class ZhihuDailyApp extends StatelessWidget {
   @override
@@ -71,30 +69,8 @@ class _SampleAppPageState extends State<SampleAppPage> {
             return buildItem(context, position);
           }),
       drawer: new Drawer(
-        child: new ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            new DrawerHeader(
-              child: new Text('Drawer Header'),
-              decoration: new BoxDecoration(
-                color: Colors.blue,
-              ),
-            ),
-            new ListTile(
-              title: new Text('Item 1'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            new ListTile(
-              title: new Text('Item 2'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
+        child: new DrawerPage(),
+      )
     );
   }
 
@@ -104,7 +80,7 @@ class _SampleAppPageState extends State<SampleAppPage> {
         child: new StoryItem(
           detail: homePageDataList[i],
           onTap: () {
-            WebUtils.startWebView(context, homePageDataList[i].id);
+            RouterUtils.startWebView(context, homePageDataList[i].id);
           },
         ));
   }
