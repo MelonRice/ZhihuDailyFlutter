@@ -19,7 +19,7 @@ class RouterUtils {
             opacity: animation,
             child: new FadeTransition(
               opacity:
-              new Tween<double>(begin: 0.5, end: 1.0).animate(animation),
+                  new Tween<double>(begin: 0.5, end: 1.0).animate(animation),
               child: child,
             ),
           );
@@ -30,23 +30,17 @@ class RouterUtils {
     String dataURL = "https://news-at.zhihu.com/api/4/news/$id";
     http.Response response = await http.get(dataURL);
 
-    Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-      return new WebviewScaffold(
-        url: json.decode(response.body)["share_url"],
-        appBar: new AppBar(
-          title: new Text(json.decode(response.body)["title"]),
-        ),
-        withZoom: true,
-        withLocalStorage: true,
-      );
-    }));
-  }
-
-  static route2ThemeList(BuildContext context,String themeId) {
     Navigator.of(context).push(new PageRouteBuilder(
         opaque: false,
         pageBuilder: (BuildContext context, _, __) {
-          return new ThemeListPage(themeId);
+          return new WebviewScaffold(
+            url: json.decode(response.body)["share_url"],
+            appBar: new AppBar(
+              title: new Text(json.decode(response.body)["title"]),
+            ),
+            withZoom: true,
+            withLocalStorage: true,
+          );
         },
         transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
           return new FadeTransition(
@@ -58,6 +52,24 @@ class RouterUtils {
             ),
           );
         }));
+
   }
 
+  static route2ThemeList(BuildContext context, String themeId) {
+    Navigator.of(context).push(new PageRouteBuilder(
+        opaque: false,
+        pageBuilder: (BuildContext context, _, __) {
+          return new ThemeListPage(themeId);
+        },
+        transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
+          return new FadeTransition(
+            opacity: animation,
+            child: new FadeTransition(
+              opacity:
+                  new Tween<double>(begin: 0.5, end: 1.0).animate(animation),
+              child: child,
+            ),
+          );
+        }));
+  }
 }
