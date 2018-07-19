@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class LayoutApp extends StatelessWidget {
@@ -27,7 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     var titleText = Container(
-      padding: EdgeInsets.all(20.0),
+      padding: EdgeInsets.all(0.0),
       child: Text(
         'Strawberry Pavlova',
         style: TextStyle(
@@ -39,9 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
 
     var subTitle = Text(
-      '''
-Pavlova is a meringue-based dessert named after the Russian ballerina Anna Pavlova. Pavlova features a crisp crust and soft, light inside, topped with fruit and whipped cream.
-''',
+      'Pavlova is a meringue-based dessert named after the Russian ballerina Anna Pavlova. Pavlova features a crisp crust and soft, light inside, topped with fruit and whipped cream.',
       textAlign: TextAlign.center,
       style: TextStyle(
         fontFamily: 'Georgia',
@@ -125,6 +122,7 @@ Pavlova is a meringue-based dessert named after the Russian ballerina Anna Pavlo
     var leftColumn = Container(
       padding: EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 20.0),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           titleText,
           subTitle,
@@ -135,8 +133,8 @@ Pavlova is a meringue-based dessert named after the Russian ballerina Anna Pavlo
     );
 
     var mainImage = Image.asset(
-      'images/pavlova.jpg',
-      fit: BoxFit.cover,
+      'lib/images/pavlova.jpg',
+      fit: BoxFit.fill,
     );
 
     return Scaffold(
@@ -149,13 +147,18 @@ Pavlova is a meringue-based dessert named after the Russian ballerina Anna Pavlo
           height: 600.0,
           child: Card(
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Container(
-                  width: 440.0,
-                  child: leftColumn,
+                Expanded(
+                    flex: 1,
+                    child: Container(
+                      width: 440.0,
+                      child: leftColumn,
+                    )),
+                Expanded(
+                  flex: 1,
+                  child: mainImage,
                 ),
-                mainImage,
               ],
             ),
           ),
