@@ -16,7 +16,6 @@ class NavigatorTest extends StatelessWidget {
     );
   }
 }
-
 class MyFadeTest extends StatefulWidget {
   MyFadeTest({Key key, this.title}) : super(key: key);
   final String title;

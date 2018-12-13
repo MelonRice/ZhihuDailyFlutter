@@ -9,5 +9,12 @@ import 'package:zhihudaily/exampleDemo/showLoading.dart';
 import 'package:zhihudaily/exampleDemo/isolateApp.dart';
 import 'package:zhihudaily/exampleDemo/listItem.dart';
 import 'package:zhihudaily/exampleDemo/layoutApp.dart';
+import 'package:zhihudaily/exampleDemo/startApp.dart';
+import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 
-void main() => runApp(new ZhihuDailyApp());
+//void main() => runApp(new LayoutApp());
+
+void main() {
+  debugPaintSizeEnabled = true;
+  runApp(StartApp());
+}

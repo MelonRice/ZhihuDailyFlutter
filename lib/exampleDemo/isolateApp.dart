@@ -1,9 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:isolate';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:async';
-import 'dart:isolate';
 
 class IsolateApp extends StatelessWidget {
   @override
@@ -102,7 +102,7 @@ class _SampleAppPageState extends State<SampleAppPage> {
       String dataURL = data;
       http.Response response = await http.get(dataURL);
       // Lots of JSON to parse
-      replyTo.send(JSON.decode(response.body));
+//      replyTo.send(JSON.decode(response.body));
     }
   }
 
